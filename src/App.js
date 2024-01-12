@@ -9,8 +9,9 @@ import {
 } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 
-import BasicExample from "./Pages/User/UserForm"; 
-import Table from "./Pages/component/Table/Table"
+import BasicExample from "./Pages/User/UserForm";
+import Table from "./Pages/component/Table/Table";
+import Form from "./Pages/component/Form/Form";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,16 @@ const router = createBrowserRouter([
     element: <BasicExample />,
   },
   {
+    path: "/Form/:id",
+    element: <Form />,
+  },
+  {
     path: "/Table",
     element: <Table />,
+  },
+  {
+    path: "/Form",
+    element: <Form />,
   },
 ]);
 

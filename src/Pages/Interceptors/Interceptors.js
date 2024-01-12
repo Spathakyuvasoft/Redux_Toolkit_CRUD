@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom"; 
-import {useDispatch} from "react-redux";
-import Table from "../component/Table/Table"; 
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Table from "../component/Table/Table";
 import makingOfList from "../../ReduxToolkit/userSlice/userSlice";
 
 const axiosInterceptor = axios.create({
@@ -13,8 +13,6 @@ const axiosInterceptor = axios.create({
 
 axiosInterceptor.interceptors.request.use(
   (config) => {
-    console.log("leo");
-
     const token = localStorage.getItem("jwt_Token");
     console.log(token);
     if (token) {
@@ -31,15 +29,15 @@ axiosInterceptor.interceptors.request.use(
 );
 
 axiosInterceptor.interceptors.response.use(
-  (response) => {  
-    console.log(response)
+  (response) => {
+    console.log(response);
     if (response.data.token) {
       console.log(response.data.token);
       localStorage.setItem("jwt_Token", response.data.token);
       console.log("push it to the router", localStorage.getItem("jwt_Token"));
       window.location.href = "/Table";
-    } 
-      return response;
+    }
+    return response;
   },
   (error) => {
     return Promise.reject(error);
