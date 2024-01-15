@@ -28,27 +28,30 @@ const Form = () => {
   const params = useParams();
   const userId = params.id;
   //   const acessStateTable = useSelector((state) => state.list);
-//   const getUpdatedCredentials = useSelector((state) => state.counter.data.data);
+  const getUpdatedCredentials = useSelector(
+    (state) => state.counter.emptyObject
+  );
 
+  console.log(getUpdatedCredentials);
   useEffect(() => {
     if (userId) {
       dispatch(fetchUser(userId));
     }
   }, [userId, dispatch]);
 
-//   useEffect(() => {
-//     const { name, phone, email } = getUpdatedCredentials;
+  useEffect(() => {
+    const { name, phone, email } = getUpdatedCredentials;
 
-//     if (userId) {
-//       setForm({ name, phone, email });
-//       setStatus(true);
-//       setselectedId(userId);
-//     }
+    if (userId) {
+      setForm({ name, phone, email });
+      setStatus(true);
+      setselectedId(userId);
+    }
 
-//     return () => {
-//       setForm({ name: "", phone: "", email: "" });
-//     };
-//   }, [getUpdatedCredentials]);
+    return () => {
+      setForm({ name: "", phone: "", email: "" });
+    };
+  }, [getUpdatedCredentials]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

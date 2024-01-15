@@ -1,6 +1,10 @@
 import axios from "axios";
 import axiosInterceptor from "../Interceptors/Interceptors";
-import editUserData from "../../ReduxToolkit/userSlice/userSlice";
+import {
+  editUserData,
+  editUserLoading,
+  editUserError,
+} from "../../ReduxToolkit/userSlice/userSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const postUser = (userCredentials) => {
@@ -73,15 +77,21 @@ export const updateUser = (userCredentials) => {
 
 export const fetchUser = (userId) => {
   return async (dispatch) => {
+    dispatch(editUserLoading());
     try {
       const response = await axiosInterceptor.get(
         `/userData/getUser/${userId}`
       );
-      
+      console.log(response.data.data);
       dispatch(editUserData(response.data.data));
     } catch (error) {
-      debugger;
-      console.log("error in fetching individul user");
+      console.log(error);
+      dispatch(editUserError(error));
     }
   };
 };
+
+// export const fetchUser = createAsyncThunk("data/fetchData", async () => {
+//   const response = await axiosInterceptor.get(`/userData/getUser/${userId}`);
+//   return response.data;
+// });

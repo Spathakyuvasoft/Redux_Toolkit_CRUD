@@ -25,7 +25,8 @@ const Table = () => {
   const stateacess = () => {
     if (userTable.loading === true) {
       console.log("spinner");
-    } else if (userTable.data !== null) {
+    } else if (userTable.data !== null) { 
+      console.log(userTable.data)
       console.log("data is avilable");
       return (
         <table className="table">
@@ -65,11 +66,7 @@ const Table = () => {
           })}
         </table>
       );
-    } else if (
-      userTable.data === null &&
-      userTable.error === null &&
-      userTable.loading === false
-    ) {
+    } else {
       return <p>No data is avilable to show here.</p>;
     }
   };

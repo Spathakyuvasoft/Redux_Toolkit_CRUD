@@ -5,17 +5,33 @@ const initialState = {
   loading: false,
   error: null,
   data: null,
+  userLoading: false,
+  errorUser: null,
   emptyObject: {},
 };
 
-export const counterSlice = createSlice({
+const counterSlice = createSlice({
   name: "data/fetchData",
   initialState,
   reducers: {
+    editUserLoading: (initialState, action) => {
+      return {
+        ...initialState,
+        userLoading: true,
+      };
+    },
     editUserData: (initialState, action) => {
       return {
         ...initialState,
         emptyObject: { ...action.payload },
+        userLoading: false,
+      };
+    },
+    editUserError: (initialState, action) => {
+      return {
+        ...initialState,
+        userLoading: false,
+        errorUser: action.payload,
       };
     },
   },
@@ -35,5 +51,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { editUserData } = counterSlice.actions;
+export const { editUserData, editUserLoading, editUserError } =
+  counterSlice.actions;
 export default counterSlice.reducer;
