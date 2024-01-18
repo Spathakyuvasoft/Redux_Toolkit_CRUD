@@ -16,11 +16,9 @@ axiosInterceptor.interceptors.request.use(
     const token = localStorage.getItem("jwt_Token");
     console.log(token);
     if (token) {
-      config.headers[
-        "Authorization"
-      ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTkzYWRkNGY1NDdmOTQ5MGEwZTk5MDkiLCJpYXQiOjE3MDUyOTM1MzYsImV4cCI6MTcwNTU1MjczNn0.BwkTh8b5rUDVbDdE_7THBXWuEe--aM3809vOq-urnAc`;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
-
+    // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTkzYWRkNGY1NDdmOTQ5MGEwZTk5MDkiLCJpYXQiOjE3MDUyOTM1MzYsImV4cCI6MTcwNTU1MjczNn0.BwkTh8b5rUDVbDdE_7THBXWuEe--aM3809vOq-urnAc
     return config;
   },
   (error) => {
@@ -32,9 +30,7 @@ axiosInterceptor.interceptors.response.use(
   (response) => {
     console.log(response);
     if (response.data.token) {
-      console.log(response.data.token);
       localStorage.setItem("jwt_Token", response.data.token);
-      console.log("push it to the router", localStorage.getItem("jwt_Token"));
       window.location.href = "/Table";
     }
     return response;

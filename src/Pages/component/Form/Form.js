@@ -9,7 +9,8 @@ import {
   updateUser,
   fetchUser,
 } from "../../UserAuth/UserAuth";
-import { useParams } from "react-router-dom";
+import UserForm from "../../User/UserForm";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Form = () => {
   const [formData, setForm] = useState({
@@ -24,7 +25,7 @@ const Form = () => {
   const [selectedId, setselectedId] = useState("");
 
   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const params = useParams();
   const userId = params.id;
   //   const acessStateTable = useSelector((state) => state.list);
@@ -32,7 +33,7 @@ const Form = () => {
     (state) => state.counter.emptyObject
   );
 
-  console.log(getUpdatedCredentials);
+  console.log(getUpdatedCredentials.data);
   useEffect(() => {
     if (userId) {
       dispatch(fetchUser(userId));
@@ -122,6 +123,16 @@ const Form = () => {
     setStatus(false);
   };
 
+  const token = localStorage.getItem("jwt_Token");
+
+  // useEffect(() => {
+  //   if (!token) {
+  //     return navigate("/");
+  //   }
+  // });
+  if (!token) {
+    return navigate("/");
+  }
   return (
     <div className="formPage">
       <div className="form">
@@ -173,6 +184,8 @@ const Form = () => {
       </Link>
     </div>
   );
+
+  // return navigate("/");
 };
 
 export default Form;

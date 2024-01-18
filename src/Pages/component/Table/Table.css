@@ -1,0 +1,25 @@
+.Table {
+  height: 100vh;
+  width: 100%;
+  background-color: antiquewhite;
+}
+
+.navbar {
+  width: 100%;
+  background-color: beige;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userTable {
+  margin: auto;
+  width: 80%;
+}
+ 
+
+.centered{
+    background-color: aqua; 
+    width:30%; 
+    margin:auto;
+}

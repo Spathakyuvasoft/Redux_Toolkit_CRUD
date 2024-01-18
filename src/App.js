@@ -8,7 +8,7 @@ import {
   Route,
 } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import BasicExample from "./Pages/User/UserForm";
 import Table from "./Pages/component/Table/Table";
 import Form from "./Pages/component/Form/Form";
@@ -20,16 +20,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/Form/:id",
-    element: <Form />,
+    element: <PrivateRoute component={Form} />,
   },
   {
     path: "/Table",
-    element: <Table />,
+    element: <PrivateRoute component={Table} />,
   },
   {
     path: "/Form",
-    element: <Form />,
+    element: <PrivateRoute component={Form} />,
   },
 ]);
+// element: <PrivateRoute component={App} />;
 
 export default router;

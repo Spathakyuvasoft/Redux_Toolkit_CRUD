@@ -27,6 +27,11 @@ export const fetchUsers = createAsyncThunk("data/fetchData", async () => {
   return response.data;
 });
 
+export const fetchUser = createAsyncThunk("data/Data", async (userId) => {
+  const response = await axiosInterceptor.get(`/userData/getUser/${userId}`);
+  return response.data.data;
+});
+
 export const deleteUser = (Id) => {
   return async (dispatch) => {
     try {
@@ -37,7 +42,7 @@ export const deleteUser = (Id) => {
       // console.log(response, "aswer");
       dispatch(fetchUsers());
     } catch (error) {
-      console.log("fecing", error);
+      console.log(error);
     }
   };
 };
@@ -51,7 +56,6 @@ export const postUserCred = (userCredentials) => {
         userCredentials
       );
 
-      console.log("done it");
       console.log(response);
       // dispatch(addUserToTable(userCredentials));
       dispatch(fetchUsers());
@@ -75,21 +79,21 @@ export const updateUser = (userCredentials) => {
   };
 };
 
-export const fetchUser = (userId) => {
-  return async (dispatch) => {
-    dispatch(editUserLoading());
-    try {
-      const response = await axiosInterceptor.get(
-        `/userData/getUser/${userId}`
-      );
-      console.log(response.data.data);
-      dispatch(editUserData(response.data.data));
-    } catch (error) {
-      console.log(error);
-      dispatch(editUserError(error));
-    }
-  };
-};
+// export const fetchUser = (userId) => {
+//   return async (dispatch) => {
+//     dispatch(editUserLoading());
+//     try {
+//       const response = await axiosInterceptor.get(
+//         `/userData/getUser/${userId}`
+//       );
+//       console.log(response.data.data);
+//       dispatch(editUserData(response.data.data));
+//     } catch (error) {
+//       console.log(error);
+//       dispatch(editUserError(error));
+//     }
+//   };
+// };
 
 // export const fetchUser = createAsyncThunk("data/fetchData", async () => {
 //   const response = await axiosInterceptor.get(`/userData/getUser/${userId}`);

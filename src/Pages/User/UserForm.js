@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "../../ReduxToolkit/Store/Store";
 import { postUser } from "../UserAuth/UserAuth";
+import { useNavigate, useLocation, useHistory } from "react-router-dom";
+import Table from "../component/Table/Table";
 
 function BasicExample() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const [formData, setForm] = useState({ email: "", password: "" });
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -20,6 +24,17 @@ function BasicExample() {
     dispatch(postUser(formData));
     console.log(formData);
   };
+  const token = localStorage.getItem("jwt_Token");
+  
+  useEffect(() => {
+    if (token) {
+      return navigate("/Table");
+    }
+  }, []);
+
+  // if (token) {
+  //   return navigate("/Table");
+  // }
 
   return (
     <Container
